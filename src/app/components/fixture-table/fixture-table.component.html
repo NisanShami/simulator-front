@@ -1,0 +1,44 @@
+<p-table
+  #dt1
+  [value]="photos"
+  dataKey="id"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [(selection)]="selectedPhotos"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [paginator]="true"
+  [globalFilterFields]="headerCols"
+>
+  <ng-template pTemplate="caption">
+    <h3>Fixtures</h3>
+    <div class="flex">
+      <input
+        pInputText
+        type="text"
+        (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+        placeholder="Search keyword"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 20%"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+      <th style="width: 20%"
+        *ngFor="let headerColName of headerColsNames"
+        [pSortableColumn]="headerColName === 'AlbumId' ? 'albumId' : headerColName.toLowerCase()"
+      >
+        {{ headerColName }}
+        <p-sortIcon [field]="headerColName.toLowerCase()"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-photo>
+    <tr>
+      <td><p-tableCheckbox [value]="photo"></p-tableCheckbox></td>
+      <td *ngFor="let headerCol of headerCols">
+        {{ photo[headerCol] }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
