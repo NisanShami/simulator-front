@@ -1,0 +1,19 @@
+<div>
+  <form [formGroup]="entitesForm" (ngSubmit)="onSubmit()">
+    <div class="filters-wrapper">
+      <app-filter
+        formControlName="providerId"
+        [entity]="'providers'"
+      ></app-filter>
+      <app-filter formControlName="sportId" [entity]="'sports'"></app-filter>
+      <app-filter
+        formControlName="locationId"
+        [entity]="'locations'"
+      ></app-filter>
+      <app-filter formControlName="leagueId" [entity]="'leagues'"></app-filter>
+      <div>
+        <p-button type="submit" label="Search" [disabled]="entitesForm.invalid" />
+      </div>
+    </div>
+  </form>
+</div>

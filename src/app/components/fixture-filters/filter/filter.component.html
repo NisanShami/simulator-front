@@ -1,0 +1,22 @@
+  <p-dropdown
+    [options]="data"
+    optionLabel="name"
+    (onChange)="onChangeValue($event)"
+    [filter]="true"
+    filterBy="name"
+    [showClear]="true"
+    [virtualScroll]="true"
+    [virtualScrollItemSize]="'24'"
+    placeholder="Select a {{ entity }}"
+  >
+    <ng-template pTemplate="selectedItem" let-selectedOption>
+      <div class="flex align-items-center gap-2">
+        <div>{{ selectedOption.name }}</div>
+      </div>
+    </ng-template>
+    <ng-template let-sport pTemplate="item">
+      <div class="flex align-items-center gap-2">
+        <div>{{ sport.name }}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>

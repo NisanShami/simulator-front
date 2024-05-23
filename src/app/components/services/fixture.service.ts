@@ -1,16 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Photo } from '../models/fixture.model';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FixtureService {
+  private filtersAsQueryStringObject = new Subject<string>();
+  readonly filtersAsQueryString$ =
+    this.filtersAsQueryStringObject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getData(): Observable<Photo[]>{
-    return this.http.get<Photo[]>('https://jsonplaceholder.typicode.com/photos');
+  getAllData(entity: string, params?: string): Observable<any[]> {
+    const url =
+      `http://localhost:50000/${entity}` + (params ? `/search?${params}` : '');
+    return this.http.get<any[]>(url);
+  }
+
+  setFiltersQueryString(queryString: string) {
+    this.filtersAsQueryStringObject.next(queryString);
   }
 }

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FixtureLsportsBasedComponent } from './components/fixture-lsports-based/fixture-lsports-based.component';
 import { FixtureTableComponent } from './components/fixture-table/fixture-table.component';
 
 const routes: Routes = [
-  { path: 'fixtures', component: FixtureTableComponent },
+  { path: '', component: FixtureTableComponent },
   { path: '', redirectTo: '/fixtures', pathMatch: 'full' },
 ];
 
